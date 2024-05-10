@@ -34,5 +34,15 @@ h1{
 }
 
 .print{
-	padding: 2em;
+	padding:0 2em;
+}
+.print p{
+	color: #333;
+}
+.print ul{
+	padding: 0;
+}
+.print ul li{
+	list-style: none;
+	text-align: left;
 }
