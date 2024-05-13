@@ -1,59 +1,52 @@
 <template>
 	<div class="container">
 		<h1>구구단 과제</h1>
-		<div class="card">
-			<input v-model.number="inputTime" calss="time" type="text" placeholder="단수를 입력해 주세요(숫자만)" />
-			<input v-model.number="inputLines" class="line" type="text" placeholder="출력할 줄을 입력해 주세요(숫자만)" />
-			<button class="execution-btn" type="button" @click="multiply">구구단 실행</button>
-		</div>
+		<form class="card" @submit="onSubmitForm">
+			<input v-model="inputTime" type="number" placeholder="단수를 입력해 주세요." />
+			<input v-model="inputLines" type="number" placeholder="출력할 줄을 입력해 주세요." />
+			<button class="execution-btn" type="submit" @click="multiply">구구단 실행</button>
+		</form>
 		<div class="print">
 			<p>{{ inputTime }}</p>
 			<p>{{ inputLines }}</p>
-			<ul>
-				<li v-for="multiply in multiplies" 
-					:key="multiply" 
-					:ref="(el) => itemRefs.push(el.textContent)"
-				>
-					{{ multiply }}
+			<!-- <ul>
+				<li v-for="inputLine in inputLines" 
+					:key="inputLine" 
+				> 
+					{{ inputTime }}단 x {{ inputLine }} = {{ inputTime * inputLine }}
 				</li>
-				<!-- <li v-for="multiply in multiplies" 
-				:key="multiply" 
-				:ref="(el) => multiplies.push(el.textContent)"
-				>
-					{{ multiply }}
-				</li> -->
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 </template>
 
 
 <script>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 export default {
 	setup() {
 		const inputTime = ref('');
-		// const inputTimes = ref([]);
-
 		const inputLines = ref('');
-		const execution = ref();
-		
-		
-		const multiplies = () => {
-			/* inputTime.value */
-			console.log(inputTime.value)
-			console.log(inputLines.value)
-			inputTime.value * inputLines.value
+		// const multiply = ref (false);
 
+		const onSubmitForm = (e) => {
+			e.preventDefault();
+			console.log(e);
+			
 		}
+		const multiply = () => {
+			if( inputTime.value === '' || inputLines.value === '') {
+				alert('숫자를 입력해주세요');
+			}
+		};
 
 		
 		return {
 			inputTime,
 			inputLines,
-			execution,
-			multiplies
+			onSubmitForm,
+			multiply
 		};
 	},
 };
