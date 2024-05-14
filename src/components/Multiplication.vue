@@ -30,10 +30,7 @@ export default {
 		const inputResult = ref([]);
 		// const multiply = ref (false);
 
-		const multipy = (e) => {
-			// e.preventDefault();
-			// console.log(e);
-
+		const multipy = () => {
 			// for써서  배열에 넣고 위에서 뿌려준다.
 			// 배열에 push 
 			inputResult.value = inputTime.value
