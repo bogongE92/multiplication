@@ -12,7 +12,7 @@
 			<ul>
 				<li v-for="(number, index) in inputResult" :key="index"
 				> 
-					{{ inputTime }}단 x {{ inputLines }} = {{ number[index] }}
+					{{ inputTime }}단 x {{ number }} = {{ number[index] }}
 				</li>
 			</ul>
 		</div>
@@ -33,7 +33,15 @@ export default {
 		const multipy = () => {
 			// for써서  배열에 넣고 위에서 뿌려준다.
 			// 배열에 push 
-			inputResult.value = inputTime.value
+			for(let number = 1; number <= inputLines.value; number++) {
+				/* console.log(number)
+				console.log(inputLines.value) */
+				console.log(inputTime.value * number)
+				console.log(inputResult.value)
+				// inputResult.value = inputResult.push(inputResult.value)
+				//inputResult.value = inputResult.push('inputTime.value * number')
+			}
+			// inputResult.value = inputTime.value
 			if( inputTime.value === null || inputLines.value === null) {
 				alert('숫자를 입력해주세요');
 			}
