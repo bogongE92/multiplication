@@ -7,12 +7,10 @@
 			<button class="execution-btn" type="button" @click="multipy">구구단 실행</button>
 		</div>
 		<div class="print">
-			<p>{{ inputTime }}</p>
-			<p>{{ inputLines }}</p>
 			<ul>
-				<li v-for="(number, index) in inputResult" :key="index"
+				<li v-for="(result, index) in inputResult" :key="index"
 				> 
-					{{ inputTime }}단 x {{ number }} = {{ number[index] }}
+					{{ savedTime }}단 x {{ result.number }} = {{ result.multiplyResult }}
 				</li>
 			</ul>
 		</div>
@@ -28,24 +26,30 @@ export default {
 		const inputTime = ref(null);
 		const inputLines = ref(null);
 		const inputResult = ref([]);
-		// const multiply = ref (false);
+		const savedTime = ref(null);
 
 		const multipy = () => {
+			if( inputTime.value === null || inputLines.value === null) {
+				alert('숫자를 입력해주세요');
+				return;
+			}
+
+			// inputTime 값을 savedTime에 저장
+			savedTime.value = inputTime.value;
+
+			// 이전 결과를 지우기 -> 안지워주면 결과값이 그대로 남아 있는다. 
+			inputResult.value = []; 
+
 			// for써서  배열에 넣고 위에서 뿌려준다.
 			// 배열에 push 
 			for(let number = 1; number <= inputLines.value; number++) {
-				/* console.log(number)
-				console.log(inputLines.value) */
-				console.log(inputTime.value * number)
-				console.log(inputResult.value)
-				// inputResult.value = inputResult.push(inputResult.value)
-				//inputResult.value = inputResult.push('inputTime.value * number')
-			}
-			// inputResult.value = inputTime.value
-			if( inputTime.value === null || inputLines.value === null) {
-				alert('숫자를 입력해주세요');
+				const multiplyResult = inputTime.value * number;
+				inputResult.value.push({number, multiplyResult})
 			}
 			
+			// 입력 상자를 빈 값으로 초기화하기
+			inputTime.value = null;
+			inputLines.value = null;
 		}
 
 		
@@ -53,6 +57,7 @@ export default {
 			inputTime,
 			inputLines,
 			inputResult,
+			savedTime,
 			multipy
 		};
 	},
